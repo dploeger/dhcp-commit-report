@@ -69,3 +69,21 @@ Usage
       -h, --help            show this help message and exit
       -u URL, --url=URL     URL to the Dokuwiki XMLRPC-handler
       -p PAGE, --page=PAGE  Pagename to use
+
+Notes
+-----
+
+dhcp-commit-report outputs a special "Subnet Info" column. This is done by parsing a ISC DHCP-configuration file. The script currently doesn't support the "include"-Tag, so you simply have to paste the whole configuration together like this
+
+    cat /etc/dhcpd.conf /etc/dhcpd.d/* > /tmp/dhcp.combined
+
+and use this one.
+
+To add subnet information lines into the dhcp-conf you have to add a line right before the subnet declaration looking like this:
+
+    #$<Subnet Information>
+
+So the result should look like this:
+
+    #$My home subnet
+    subnet 192.168.0.1 netmask 255.255.255.0 {
